@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Favorites</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .favorites-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        ul li a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        a.back-link {
+            text-decoration: none;
+            color: #2ecc71;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="favorites-container">
+        <h1>Your Favorite Recipes</h1>
+        <form method="POST">
+            <input type="text" name="recipe" placeholder="Recipe Name" required>
+            <button type="submit">Add to Favorites</button>
+        </form>
+        
+        <h2>Favorites List:</h2>
+        <ul>
+            {% for recipe in favorites %}
+            <li>
+                <span>{{ recipe.recipe }}</span>
+                <div>
+                    <a href="{{ url_for('update_favorite', id=recipe.id) }}">Edit</a>
+                    <a href="{{ url_for('delete_favorite', id=recipe.id) }}" style="color: #3cabe7;">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('dashboard') }}" class="back-link">Back to Dashboard</a>
+    </div>
+</body>
+</html>

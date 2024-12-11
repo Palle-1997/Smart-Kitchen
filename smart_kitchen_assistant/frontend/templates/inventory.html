@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Inventory</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-top: 30px;
+            font-size: 36px;
+            text-align: center;
+        }
+
+        form {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        ul li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        ul li a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2ecc71;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Kitchen Inventory</h1>
+    <form method="POST">
+        <input type="text" name="item" placeholder="Item" required>
+        <input type="text" name="quantity" placeholder="Quantity" required>
+        <button type="submit">Add Item</button>
+    </form>
+    
+    <h2>Current Inventory:</h2>
+    <ul>
+        {% for item in inventory %}
+        <li>
+            {{ item.item }} ({{ item.quantity }})
+            <div>
+                <a href="{{ url_for('update_inventory', id=item.id) }}">Edit</a> 
+                <a href="{{ url_for('delete_inventory', id=item.id) }}" style="color: #3cabe7;">Delete</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

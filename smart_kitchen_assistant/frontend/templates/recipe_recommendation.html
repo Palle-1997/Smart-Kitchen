@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Recommendations</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .recommendation-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .recipe-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recipe-list li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-list li h3 {
+            color: #3498db;
+        }
+
+        .recipe-list li p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #2ecc71;
+            display: inline-block;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="recommendation-container">
+        <h1>Recipe Recommendations</h1>
+
+        <form method="POST">
+            <input type="text" name="ingredients" placeholder="Enter ingredients separated by commas" required>
+            <button type="submit">Get Recipes</button>
+        </form>
+
+        {% if recommendations %}
+            <h2>Recommended Recipes for: {{ ingredients }}</h2>
+            <ul class="recipe-list">
+                {% for recipe in recommendations %}
+                <li>
+                    <h3>{{ recipe.name }}</h3>
+                    <p><strong>Description:</strong> {{ recipe.description }}</p>
+                    <p><em>Ingredients:</em> {{ recipe.ingredients }}</p>
+                    <p><em>Instructions:</em> {{ recipe.instructions }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        {% elif ingredients %}
+            <p>No recipes found for the ingredients provided.</p>
+        {% endif %}
+
+        <a href="{{ url_for('dashboard') }}" class="back-link">Back to Dashboard</a>
+    </div>
+</body>
+</html>

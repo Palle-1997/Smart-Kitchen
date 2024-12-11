@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Favorite Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Update Favorite Recipe</h1>
+    <form method="POST">
+        <input type="text" name="recipe" value="{{ favorite_recipe.recipe }}" required>
+        <button type="submit">Update Recipe</button>
+    </form>
+    <a href="{{ url_for('favorites') }}">Back to Favorites</a>
+</body>
+</html>

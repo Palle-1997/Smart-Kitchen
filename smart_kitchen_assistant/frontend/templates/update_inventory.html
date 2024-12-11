@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Inventory Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Update Inventory Item</h1>
+    <form method="POST">
+        <input type="text" name="item" value="{{ inventory_item.item }}" required>
+        <input type="text" name="quantity" value="{{ inventory_item.quantity }}" required>
+        <button type="submit">Update Item</button>
+    </form>
+    <a href="{{ url_for('inventory') }}">Back to Inventory</a>
+</body>
+</html>
